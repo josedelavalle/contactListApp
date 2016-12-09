@@ -77,6 +77,7 @@ app.controller('contactListController', function($scope, $window, $location, $ti
 	$scope.confirmDelete = function(id, ndx, imagefile) {
 
 		if ($window.confirm('Are you sure you want to delete this contact?')) {
+			
 			removeContact(id, ndx, imagefile);
 		}
 	};
@@ -98,9 +99,7 @@ app.controller('contactListController', function($scope, $window, $location, $ti
 		removeContactService.delete(id, imagefile).then(function (msg) {
 
 			//remove contact from scope without re-retrieving from database
-			console.log($scope.contactList);
-			console.log(ndx);
-			$scope.contactList.splice(ndx + ($scope.pageSize * $scope.currentPage), 1);
+			$scope.contactList.splice(ndx, 1);
 
 		}, function (err) {
 			console.log('we got an error trying to delete contact');

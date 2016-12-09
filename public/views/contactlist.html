@@ -64,7 +64,7 @@
 					<p>{{contact.comments}}</p>
 				</td>
 				<td data-label="Actions">
-					<button class="btn btn-danger" ng-click="confirmDelete(contact._id, $index, contact.profilepicture)">
+					<button class="btn btn-danger" ng-click="confirmDelete(contact._id, $index + ((currentPage-1) * pageSize), contactList[$index + ((currentPage-1) * pageSize)].profilepicture)">
 						Delete
 					</button>
 					<button class="btn btn-warning" ng-click="getContact(contact._id)">
