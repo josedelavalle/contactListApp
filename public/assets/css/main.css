@@ -22,7 +22,7 @@
   to {
     transform: translateX(-100%); } }
 
-.ng-leave {
+.contactlist .ng-leave {
   animation: slideOutLeft 0.3s both ease-in-out;
   z-index: 8889; }
 
@@ -35,10 +35,14 @@
 .row-striped:nth-of-type(even) {
   background-color: #ffffff; }
 
+.btn {
+  min-width: 70px;
+  margin-bottom: 5px; }
+
 .contactlist table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 5px; }
+  table-layout: fixed; }
 
 .contactlist th {
   background: #333;
@@ -48,7 +52,10 @@
 .contactlist td, .contactlist th {
   padding: 6px;
   border: 1px solid #ccc;
-  text-align: left; }
+  text-align: left;
+  word-wrap: break-word;
+  vertical-align: top;
+  text-align: center; }
 
 @media only screen and (max-width: 1000px), (min-device-width: 768px) and (max-device-width: 1024px) {
   .contactlist {
@@ -67,15 +74,17 @@
       border-bottom: 1px solid #eee;
       position: relative;
       padding-left: 50%;
-      padding-bottom: 20px; }
+      padding-bottom: 20px;
+      padding-top: 20px; }
     .contactlist td:before {
       position: absolute;
       /* Top/left values mimic padding */
       top: 6px;
       left: 6px;
-      width: 45%;
+      width: 50%;
       padding-right: 10px;
-      white-space: nowrap; }
+      white-space: nowrap;
+      border-right: 1px solid #eee; }
     .contactlist td:before {
       content: attr(data-label);
       font-weight: 700; } }
@@ -139,20 +148,25 @@
 body, input, textarea, select, footer {
   font-family: 'Open Sans', sans-serif !important;
   font-weight: 500;
-  background: #fafafa;
-  margin-top: 30px; }
+  background: #292c2f;
+  padding-top: 30px; }
 
 .container-fluid {
   background: #ddd;
-  border-radius: 10px;
   box-sizing: border-box; }
 
 h1 {
+  letter-spacing: -0.05em;
   font-weight: 900; }
 
-.thumb {
-  width: 50px;
-  border-radius: 50%; }
+.round {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  overflow: hidden; }
+
+.push {
+  margin-top: 20px; }
 
 .headerImage {
   width: 100%;
@@ -168,12 +182,15 @@ h1 {
   visibility: hidden;
   max-width: 0px; }
 
-label:not(.btn) {
-  color: black !important; }
+label:not(.btn), span {
+  color: black !important;
+  font-weight: 700; }
 
 @media only screen and (max-width: 1000px), (min-device-width: 768px) and (max-device-width: 1024px) {
   .headerImage {
     background-attachment: scroll;
     border-radius: 0px; }
   .container-fluid {
-    border-radius: 0px; } }
+    border-radius: 0px; }
+  .col-sm-12 {
+    border-bottom: 2px solid black; } }

@@ -17,7 +17,7 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
   });
 }]);
 
-app.controller('contactListController', function($scope, $window, $location, getContactsService, addContactService, removeContactService, getOneContactService, updateContactService, multipartForm) {
+app.controller('contactListController', function($scope, $window, $location, $timeout, getContactsService, addContactService, removeContactService, getOneContactService, updateContactService, multipartForm) {
 	
 	$scope.groups = ["Family", "Friend", "Colleague", "Associate"];
 	$scope.contact = { };
@@ -27,12 +27,13 @@ app.controller('contactListController', function($scope, $window, $location, get
 	$scope.pageSize = 5;
 	$scope.currentPage = 1;
 
-	
+	$scope.thumbnail = {dataUrl: ''};
+
 	// set the max date for birthday selection to today
 	$scope.maxDate = new Date();
 
 	$scope.submitContact = function(contact) {
-
+		console.log('here');
 		// see if user provided image before attempting to upload
 		if (contact.profilepicture == null) {
 			addContact(contact);
@@ -60,7 +61,7 @@ app.controller('contactListController', function($scope, $window, $location, get
 			console.log('we got an error trying to retrieve contacts');
 			console.log(err);
 		});
-
+		
 	};
 	
 	goGetContacts();
@@ -68,6 +69,7 @@ app.controller('contactListController', function($scope, $window, $location, get
 	$scope.confirmCancel = function() {
 
 		if ($window.confirm('Are you sure you want to cancel?')) {
+			$scope.thumbnail = {dataUrl: ''};
 			$location.path('/');
 		}
 	};
@@ -88,6 +90,7 @@ app.controller('contactListController', function($scope, $window, $location, get
 			console.log('we got an error trying to add contact');
 			console.log(err);
 		});
+
 	};
 
 	removeContact = function(id, ndx, imagefile) {
@@ -104,7 +107,7 @@ app.controller('contactListController', function($scope, $window, $location, get
 	};
 
 	$scope.getContact = function(id) {
-		$scope.newImage = false;
+		$scope.thumbnail = {dataUrl: ''};
 		getOneContactService.get(id).then(function (msg) {
 			console.log(msg);
 			$scope.contact = msg.data;
@@ -119,8 +122,18 @@ app.controller('contactListController', function($scope, $window, $location, get
 
 	$scope.updateContact = function(contact) {
 		
-		
-		goUpdateContact(contact);
+		if ($scope.thumbnail.dataUrl === '') {
+			goUpdateContact(contact);
+			goGetContacts();
+		} else {
+			var uploadUrl = "/upload";
+			// upload image
+			multipartForm.post(uploadUrl, contact).then(function (msg) {
+				contact.profilepicture = msg.data.profilepicture;
+				goUpdateContact(contact);
+				goGetContacts();
+			});
+		}
 		
 		
 	};
@@ -142,7 +155,28 @@ app.controller('contactListController', function($scope, $window, $location, get
 	$scope.deselectContact = function() {
 		// clear scope variable in case add is called after edit
 		$scope.contact = "";
+		$scope.thumbnail = {dataUrl: ''};
 	};
+
+	
+    $scope.fileReaderSupported = window.FileReader !== null;
+
+    $scope.photoChanged = function(files){
+            if (files !== null) {
+                var file = files[0];
+            if ($scope.fileReaderSupported && file.type.indexOf('image') > -1) {
+                $timeout(function() {
+                    var fileReader = new FileReader();
+                    fileReader.readAsDataURL(file);
+                    fileReader.onload = function(e) {
+                        $timeout(function(){
+     						$scope.thumbnail.dataUrl = e.target.result;
+                        });
+                    };
+                });
+            }
+          }
+      };
 
 });
 

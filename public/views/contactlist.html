@@ -1,35 +1,36 @@
 <h1>Contact List</h1>
-<a href="/contact"><button class="btn btn-primary" ng-click="deselectContact()">Add</button></a>
+<a href="/contact"><button class="btn btn-primary" ng-click="deselectContact()">Add</button></a><br>
+<pagination total-items="contactList.length" ng-model="currentPage" items-per-page="pageSize"></pagination>
 <div class="contactlist">
 	<table class="table-striped">
 		<thead>
 			<tr>
 				<th>
-					First Name
+					<i class="fa fa-user"></i>&nbsp;&nbsp;First Name
 				</th>
 				<th>
-					Last Name
+					<i class="fa fa-user"></i>&nbsp;&nbsp;Last Name
 				</th>
 				<th>
-					Email
+					<i class="fa fa-envelope"></i>&nbsp;&nbsp;Email
 				</th>
 				<th>
-					Phone
+					<i class="fa fa-phone"></i>&nbsp;&nbsp;Phone
 				</th>
 				<th>
-					Birthday
+					<i class="fa fa-birthday-cake"></i>&nbsp;&nbsp;Birthday
 				</th>
 				<th>
-					Picture
+					<i class="fa fa-camera"></i>&nbsp;&nbsp;Picture
 				</th>
 				<th>
-					Groups
+					<i class="fa fa-users"></i>&nbsp;&nbsp;Groups
 				</th>
 				<th>
-					Comments
+					<i class="fa fa-comment"></i>&nbsp;&nbsp;Comments
 				</th>
 				<th>
-					Actions
+					<i class="fa fa-mouse-pointer"></i>&nbsp;&nbsp;Actions
 				</th>
 			</tr>
 		</thead>
@@ -52,7 +53,7 @@
 					{{contact.birthday | date}}
 				</td>
 				<td data-label="Picture">
-					<img ng-if="contact.profilepicture" class="thumb" ng-src='uploads/{{contact.profilepicture}}'/>
+					<img ng-if="contact.profilepicture" class="round" ng-src='uploads/{{contact.profilepicture}}'/>
 				</td>
 				<td data-label="Groups">
 					<p ng-repeat="group in contact.groups">
@@ -60,7 +61,7 @@
 					</p>
 				</td>
 				<td data-label="Comments">
-					{{contact.comments}}
+					<p>{{contact.comments}}</p>
 				</td>
 				<td data-label="Actions">
 					<button class="btn btn-danger" ng-click="confirmDelete(contact._id, $index, contact.profilepicture)">

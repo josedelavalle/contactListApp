@@ -1,6 +1,9 @@
 @keyframes slideOutLeft {
     to      { transform: translateX(-100%); }
 }
-.ng-leave {
-	animation: slideOutLeft 0.3s both ease-in-out; z-index: 8889;
+
+.contactlist {
+	.ng-leave {
+		animation: slideOutLeft 0.3s both ease-in-out; z-index: 8889;
+	}
 }

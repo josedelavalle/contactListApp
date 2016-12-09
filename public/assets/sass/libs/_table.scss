@@ -10,11 +10,18 @@
   background-color: #ffffff;
 }
 
+.btn {
+	min-width:70px;
+	margin-bottom:5px;
+}
+
+
+
 .contactlist {
 	table { 
 	  width: 100%; 
 	  border-collapse: collapse;
-	  margin-top: 5px; 
+	  table-layout: fixed;
 	}
 
 	th { 
@@ -24,8 +31,11 @@
 	}
 	td, th { 
 	  padding: 6px; 
-	  border: 1px solid #ccc; 
+	  border: 1px solid #ccc;
 	  text-align: left; 
+	  word-wrap:break-word;
+	  vertical-align: top;
+	  text-align: center;
 	}
 
 	@media 
@@ -51,6 +61,7 @@
 			position: relative;
 			padding-left: 50%;
 			padding-bottom: 20px;
+			padding-top: 20px;
 		}
 		
 		td:before { 
@@ -58,9 +69,10 @@
 			/* Top/left values mimic padding */
 			top: 6px;
 			left: 6px;
-			width: 45%; 
+			width: 50%; 
 			padding-right: 10px; 
 			white-space: nowrap;
+			border-right: 1px solid #eee;
 		}
 		
 		/* Preceded each line with the data-label to act as title due to mobile hidden th */

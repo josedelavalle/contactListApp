@@ -58,7 +58,7 @@ app.get('/contactlist', function (req, res) {
 // add contact route
 app.post('/contactlist', function (req, res) {
 	
-	console.log(req);
+	console.log('add contact');
 	db.contactlist.insert(req.body, function(err, data) {
 		res.json(data);
 	}, function (err) {
@@ -76,7 +76,7 @@ app.delete('/contactlist/:id/:imagefile', function (req, res) {
 	db.contactlist.remove({_id: mongojs.ObjectId(id)}, function (err, data) {
 
 		// if contact is deleted ... delete the profile picture from server
-		if (imagefile != 'undefined' && imagefile != 'null') fs.unlink('public/uploads/' + imagefile);
+		if (imagefile != undefined && imagefile != 'null') fs.unlink('public/uploads/' + imagefile);
 
 		res.json(data);
 	}, function (err) {
@@ -112,6 +112,7 @@ app.put('/contactlist/:id', function (req, res) {
 						email: req.body.email,
 						phone: req.body.phone,
 						birthday: req.body.birthday,
+						profilepicture: req.body.profilepicture,
 						groups: req.body.groups,
 						comments: req.body.comments
 					}

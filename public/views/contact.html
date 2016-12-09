@@ -18,10 +18,11 @@
 		Cancel
 	</button>
 </div>
-
+<hr>
 
 
 <form name="addContactForm" method="POST" required>
+
 	<div class="row row-striped">
 		<div class="col-sm-12 col-md-6">
 			<md-input-container class="md-block">
@@ -58,29 +59,38 @@
 		</div>
 	</div><div class="row row-striped">
 		<div class="col-sm-12 col-md-6">
-			<label>Birthday</label><br>
-			<md-datepicker ng-model="contact.birthday" md-max-date="maxDate"></md-datepicker>
-			<p ng-show="contact.birthday">{{contact.birthday | date}}</p>
+			<label class="push">Birthday</label>
+			<md-input-container class="md-block">
+				<md-datepicker ng-if="!contact.birthday" ng-model="contact.birthday" md-max-date="maxDate"></md-datepicker>
+				<md-datepicker ng-if="contact.birthday" ng-init="contact.birthday = (contact.birthday | toDate)" ng-model="contact.birthday" md-placeholder="Birthday" md-max-date="maxDate"></md-datepicker>
+				<p>{{contact.birthday | date}}</p>
+			</md-input-container>
 		</div>
 		<div class="col-sm-12 col-md-6">
-			<label>Profile Picture</label>
-			<div ng-if="!contact.profilepicture">
-				<input id="input-file-id" class="ng-hide" type="file" id="profileImage" ng-model="contact.profilepicture" file-model="contact.profilepicture" />
-				<label for="input-file-id" class="btn btn-primary">Choose Files</label>
-			</div>
-			<div ng-if="contact.profilepicture">
-	            <img class="thumb" ng-src="../uploads/{{contact.profilepicture}}" />
+			<label class="push">Profile Picture</label>
+			
+			<div class="container">
+				<div ng-if="!contact.profilepicture || thumbnail.dataUrl">
+					<input id="input-file-id" class="ng-hide" type="file" id="profileImage" ng-model="contact.profilepicture" file-model="contact.profilepicture" onchange="angular.element(this).scope().photoChanged(this.files)"/>
+					<label for="input-file-id" class="btn btn-primary">Choose Files</label>
+				</div>
+				<img class="round" ng-if="thumbnail.dataUrl" ng-src="{{ thumbnail.dataUrl }}"/>
+
+				<div ng-if="contact.profilepicture && !thumbnail.dataUrl">
+		            <img class="round" ng-src="../uploads/{{contact.profilepicture}}" />
+				</div>
+				
 			</div>
 		</div>
 	</div><div class="row row-striped">
 		<div class="col-sm-12 col-md-6">
-			<label>Groups</label><br>
 			<md-input-container>
 		        
 		        <md-select ng-model="contact.groups" multiple>
 		          	<md-optgroup label="group">
 		            	<md-option ng-value="group" ng-repeat="group in groups">{{group}}</md-option>
 		          	</md-optgroup>
+		          	<label>Groups</label><br>
 		        </md-select>
 		    </md-input-container>
 		</div>
