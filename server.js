@@ -76,7 +76,7 @@ app.delete('/contactlist/:id/:imagefile', function (req, res) {
 	db.contactlist.remove({_id: mongojs.ObjectId(id)}, function (err, data) {
 
 		// if contact is deleted ... delete the profile picture from server
-		if (imagefile != undefined && imagefile != 'null') fs.unlink('public/uploads/' + imagefile);
+		if (imagefile != undefined && imagefile != 'undefined') fs.unlink('public/uploads/' + imagefile);
 
 		res.json(data);
 	}, function (err) {
