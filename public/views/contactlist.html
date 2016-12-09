@@ -1,0 +1,82 @@
+<h1>Contact List</h1>
+<a href="/contact"><button class="btn btn-primary" ng-click="deselectContact()">Add</button></a>
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+				First Name
+			</th>
+			<th>
+				Last Name
+			</th>
+			<th>
+				Email
+			</th>
+			<th>
+				Number
+			</th>
+			<th>
+				Birthday
+			</th>
+			<th>
+				Picture
+			</th>
+			<th>
+				Groups
+			</th>
+			<th>
+				Comments
+			</th>
+			<th>
+				Action
+			</th>
+			<th>
+				&nbsp;
+			</th>
+		</tr>
+	</thead>
+	<thead>
+		
+		<tr ng-repeat="contact in contactList | startFrom:(currentPage - 1) * pageSize | limitTo: pageSize">
+			<td>
+				{{contact.firstname}}
+			</td>
+			<td>
+				{{contact.lastname}}
+			</td>
+			<td>
+				{{contact.email}}
+			</td>
+			<td>
+				{{contact.phone}}
+			</td>
+			<td>
+				{{contact.birthday | date}}
+			</td>
+			<td>
+				<img ng-if="contact.profilepicture" class="thumb" ng-src='uploads/{{contact.profilepicture}}'/>
+			</td>
+			<td>
+				<p ng-repeat="group in contact.groups">
+					{{group}}
+				</p>
+			</td>
+			<td>
+				{{contact.comments}}
+			</td>
+			<td>
+				<button class="btn btn-danger" ng-click="confirmDelete(contact._id, $index, contact.profilepicture)">
+					Delete
+				</button>
+			</td>
+			<td>
+				<button class="btn btn-warning" ng-click="getContact(contact._id)">
+					Edit
+				</button>
+			</td>
+		</tr>
+	</thead>
+</table>
+
+
+<pagination total-items="contactList.length" ng-model="currentPage" items-per-page="pageSize"></pagination>

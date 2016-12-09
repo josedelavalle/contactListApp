@@ -1,0 +1,57 @@
+<h1>Edit Contact</h1>
+<a href="/#/"><button class="btn btn-primary">Contact List</button></a>
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+				First Name
+			</th>
+			<th>
+				Last Name
+			</th>
+			<th>
+				Email
+			</th>
+			<th>
+				Number
+			</th>
+			<th>
+				Birthday
+			</th>
+			<th>
+				Action
+			</th>
+			<th>
+				&nbsp;
+			</th>
+		</tr>
+	</thead>
+	<tr>
+		<td>
+			<input class="form-control" ng-model="contact.firstname">
+		</td>
+		<td>
+			<input class="form-control" ng-model="contact.lastname">
+		</td>
+		<td>
+			<input class="form-control" ng-model="contact.email">
+		</td>
+		<td>
+			<input class="form-control" ng-model="contact.phone">
+		</td>
+		<td>
+			<md-datepicker ng-init="contact.birthday = (contact.birthday | toDate)" ng-model="contact.birthday" md-placeholder="Birthday"
+            md-max-date="maxDate"></md-datepicker>
+		</td>
+		<td>
+			<button class="btn btn-primary" ng-click="addContact(contact)">
+				Add
+			</button>
+		</td>
+		<td>
+			<button class="btn btn-info" ng-click="updateContact()">
+				Update
+			</button>
+		</td>
+	</tr>
+</table>

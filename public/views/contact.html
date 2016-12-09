@@ -1,0 +1,96 @@
+<div class="actions" ng-if="!contact._id">
+	<!-- Add New contact -->
+	<h1>Add Contact</h1>
+	<button class="btn btn-primary" ng-disabled="addContactForm.$invalid" ng-click="submitContact(contact)">
+		Save
+	</button>
+	<button class="btn btn-danger" ng-click="confirmCancel()">
+		Cancel
+	</button>
+</div>
+<div class="actions" ng-if="contact._id">
+	<!-- Edit existing contact -->
+	<h1>Edit Contact</h1>
+	<button class="btn btn-primary" ng-disabled="addContactForm.$invalid" ng-click="updateContact(contact)">
+		Save
+	</button>
+	<button class="btn btn-danger" ng-click="confirmCancel()">
+		Cancel
+	</button>
+</div>
+
+
+<hr>
+
+<form name="addContactForm" method="POST" required>
+	<div class="row">
+		<div class="col-sm-12 col-md-6">
+			<md-input-container class="md-block">
+	          	<label>First Name</label>
+	          	<input type="text" name="firstname" ng-model="contact.firstname" required>
+	          	<span ng-show="addContactForm.firstname.$error.required">required field</span>
+	        </md-input-container>
+		</div>
+		<div class="col-sm-12 col-md-6">
+			<md-input-container class="md-block">
+	          	<label>Last Name</label>
+	          	<input type="text" name="lastname" ng-model="contact.lastname" required>
+	          	<span ng-show="addContactForm.lastname.$error.required">required field</span>
+	        </md-input-container>
+		</div>
+	</div><div class="row">
+		<div class="col-sm-12 col-md-6">
+			<md-input-container class="md-block">
+	          	<label>Email Address</label>
+	          	<input type="email" name="email" ng-model="contact.email" required>
+	          	<span ng-show="addContactForm.email.$error.required">required field</span>
+	          	<span ng-show="addContactForm.email.$error.email">Invalid Email</span>
+	        </md-input-container>
+		</div>
+		<div class="col-sm-12 col-md-6">
+			<md-input-container class="md-block">
+	          	<label>Phone Number</label>
+	          	<input name="phone" type="number" ng-minlength="10" 
+                   ng-maxlength="13" ng-model="contact.phone">
+
+	          	<span ng-show="addContactForm.phone.$error.minlength">Too Little Digits</span>
+	          	<span ng-show="addContactForm.phone.$error.maxlength">Too Many Digits</span>
+	          	<span ng-show="addContactForm.phone.$invalid">Please enter only numbers</span>
+	        </md-input-container>
+		</div>
+	</div><div class="row">
+		<div class="col-sm-12 col-md-6">
+			<label>Birthday</label><br>
+			<md-datepicker ng-if="!contact.birthday" ng-model="contact.birthday" md-placeholder="Birthday" md-max-date="maxDate"></md-datepicker>
+			<md-datepicker ng-if="contact.birthday" ng-init="contact.birthday = (contact.birthday | toDate)" ng-model="contact.birthday" md-placeholder="Birthday" md-max-date="maxDate"></md-datepicker>
+		</div>
+		<div class="col-sm-12 col-md-6">
+			<label>Profile Picture</label>
+			<div ng-if="!contact.profilepicture">
+				<input id="input-file-id" class="ng-hide" type="file" id="profileImage" ng-model="contact.profilepicture" file-model="contact.profilepicture" />
+				<label for="input-file-id" class="md-button md-raised md-primary">Choose Files</label>
+			</div>
+			<div ng-if="contact.profilepicture">
+	            <img class="thumb" ng-src="../uploads/{{contact.profilepicture}}" />
+			</div>
+		</div>
+	</div><div class="row">
+		<div class="col-sm-12 col-md-6">
+			<md-input-container>
+		        <label>Groups</label>
+		        <md-select ng-model="contact.groups" multiple>
+		          	<md-optgroup label="group">
+		            	<md-option ng-value="group" ng-repeat="group in groups">{{group}}</md-option>
+		          	</md-optgroup>
+		        </md-select>
+		    </md-input-container>
+		</div>
+		<div class="col-sm-12 col-md-6">
+			<md-input-container class="md-block">
+	            <label>Comments</label>
+	            <textarea ng-model="contact.comments" md-maxlength="2000" rows="5" md-select-on-focus></textarea>
+	        </md-input-container>
+		</div>
+	</div>
+</form>
+<hr>

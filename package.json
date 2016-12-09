@@ -1,0 +1,40 @@
+{
+  "name": "contactlistapp",
+  "version": "1.0.0",
+  "description": "MEAN stack contact list app",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/josedelavalle/contactListApp.git"
+  },
+  "keywords": [
+    "MEAN",
+    "stack",
+    "contact",
+    "list",
+    "web",
+    "app"
+  ],
+  "author": "Jose DeLavalle",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/josedelavalle/contactListApp/issues"
+  },
+  "homepage": "https://github.com/josedelavalle/contactListApp#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "fs": "0.0.1-security",
+    "mongodb": "^2.2.12",
+    "mongojs": "^2.4.0",
+    "multer": "^1.2.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-sass": "^2.3.2",
+    "nodemon": "^1.11.0"
+  }
+}
