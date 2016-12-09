@@ -27,6 +27,7 @@ app.controller('contactListController', function($scope, $window, $location, get
 	$scope.pageSize = 5;
 	$scope.currentPage = 1;
 
+	
 	// set the max date for birthday selection to today
 	$scope.maxDate = new Date();
 

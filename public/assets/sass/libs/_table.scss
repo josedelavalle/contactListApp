@@ -1,0 +1,70 @@
+
+.row {
+	padding:5px;
+}
+.row-striped:nth-of-type(odd){
+  background-color: #efefef;
+}
+
+.row-striped:nth-of-type(even){
+  background-color: #ffffff;
+}
+
+.contactlist {
+	table { 
+	  width: 100%; 
+	  border-collapse: collapse;
+	  margin-top: 5px; 
+	}
+
+	th { 
+	  background: #333; 
+	  color: white; 
+	  font-weight: bold; 
+	}
+	td, th { 
+	  padding: 6px; 
+	  border: 1px solid #ccc; 
+	  text-align: left; 
+	}
+
+	@media 
+	only screen and (max-width: 1000px),
+	(min-device-width: 768px) and (max-device-width: 1024px)  {
+
+		table, thead, tbody, th, td, tr { 
+			display: block; 
+		}
+		
+		/* this hides the thead but more accessible than display:none */
+		thead tr { 
+			position: absolute;
+			top: -9999px;
+			left: -9999px;
+		}
+		
+		tr { border: 1px solid #ccc; }
+		
+		td { 
+			border: none;
+			border-bottom: 1px solid #eee; 
+			position: relative;
+			padding-left: 50%;
+			padding-bottom: 20px;
+		}
+		
+		td:before { 
+			position: absolute;
+			/* Top/left values mimic padding */
+			top: 6px;
+			left: 6px;
+			width: 45%; 
+			padding-right: 10px; 
+			white-space: nowrap;
+		}
+		
+		/* Preceded each line with the data-label to act as title due to mobile hidden th */
+		td:before { content: attr(data-label); font-weight: 700;}
+		
+	}
+}

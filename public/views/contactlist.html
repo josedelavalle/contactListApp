@@ -1,82 +1,78 @@
 <h1>Contact List</h1>
 <a href="/contact"><button class="btn btn-primary" ng-click="deselectContact()">Add</button></a>
-<table class="table">
-	<thead>
-		<tr>
-			<th>
-				First Name
-			</th>
-			<th>
-				Last Name
-			</th>
-			<th>
-				Email
-			</th>
-			<th>
-				Number
-			</th>
-			<th>
-				Birthday
-			</th>
-			<th>
-				Picture
-			</th>
-			<th>
-				Groups
-			</th>
-			<th>
-				Comments
-			</th>
-			<th>
-				Action
-			</th>
-			<th>
-				&nbsp;
-			</th>
-		</tr>
-	</thead>
-	<thead>
-		
-		<tr ng-repeat="contact in contactList | startFrom:(currentPage - 1) * pageSize | limitTo: pageSize">
-			<td>
-				{{contact.firstname}}
-			</td>
-			<td>
-				{{contact.lastname}}
-			</td>
-			<td>
-				{{contact.email}}
-			</td>
-			<td>
-				{{contact.phone}}
-			</td>
-			<td>
-				{{contact.birthday | date}}
-			</td>
-			<td>
-				<img ng-if="contact.profilepicture" class="thumb" ng-src='uploads/{{contact.profilepicture}}'/>
-			</td>
-			<td>
-				<p ng-repeat="group in contact.groups">
-					{{group}}
-				</p>
-			</td>
-			<td>
-				{{contact.comments}}
-			</td>
-			<td>
-				<button class="btn btn-danger" ng-click="confirmDelete(contact._id, $index, contact.profilepicture)">
-					Delete
-				</button>
-			</td>
-			<td>
-				<button class="btn btn-warning" ng-click="getContact(contact._id)">
-					Edit
-				</button>
-			</td>
-		</tr>
-	</thead>
-</table>
-
+<div class="contactlist">
+	<table class="table-striped">
+		<thead>
+			<tr>
+				<th>
+					First Name
+				</th>
+				<th>
+					Last Name
+				</th>
+				<th>
+					Email
+				</th>
+				<th>
+					Phone
+				</th>
+				<th>
+					Birthday
+				</th>
+				<th>
+					Picture
+				</th>
+				<th>
+					Groups
+				</th>
+				<th>
+					Comments
+				</th>
+				<th>
+					Actions
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			
+			<tr ng-repeat="contact in contactList | startFrom:(currentPage - 1) * pageSize | limitTo: pageSize">
+				<td data-label="First Name">
+					{{contact.firstname}}
+				</td >
+				<td data-label="Last Name">
+					{{contact.lastname}}
+				</td>
+				<td data-label="Email">
+					{{contact.email}}
+				</td>
+				<td data-label="Phone">
+					{{contact.phone}}
+				</td>
+				<td data-label="Birthday">
+					{{contact.birthday | date}}
+				</td>
+				<td data-label="Picture">
+					<img ng-if="contact.profilepicture" class="thumb" ng-src='uploads/{{contact.profilepicture}}'/>
+				</td>
+				<td data-label="Groups">
+					<p ng-repeat="group in contact.groups">
+						{{group}}
+					</p>
+				</td>
+				<td data-label="Comments">
+					{{contact.comments}}
+				</td>
+				<td data-label="Actions">
+					<button class="btn btn-danger" ng-click="confirmDelete(contact._id, $index, contact.profilepicture)">
+						Delete
+					</button>
+					<button class="btn btn-warning" ng-click="getContact(contact._id)">
+						Edit
+					</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
 
 <pagination total-items="contactList.length" ng-model="currentPage" items-per-page="pageSize"></pagination>
